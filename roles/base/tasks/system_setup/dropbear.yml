@@ -1,0 +1,30 @@
+- name: system setup | dropbear | install or update daemon package
+  tags: dropbear,ssh,system,settings
+  apt:
+    name: dropbear
+    state: latest
+  when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+
+- name: system setup | dropbear | disable daemon
+  tags: dropbear,ssh,system,settings
+  service:
+    name: dropbear
+    enabled: no
+    state: stopped
+
+- name: system setup | dropbear | generate sshd_config file from template
+  tags: dropbear,ssh,system,settings
+  template:
+    src: dropbear_config.j2
+    dest: /etc/dropbear-initramfs/config
+    owner: root
+    group: root
+    mode: 0644
+  notify: system setup | dropbear | update initramfs
+
+- name: Assemble from fragments from a directory
+  assemble:
+    src: users/ssh/pubkeys/
+    remote_src: no
+    dest: /etc/dropbear-initramfs/authorized_keys
+  notify: system setup | dropbear | update initramfs

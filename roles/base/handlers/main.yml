@@ -1,0 +1,25 @@
+---
+- name: apt_update
+  apt: update_cache=yes
+
+- name: restart_sshd
+  service:
+    name: "{{ openssh_service }}"
+    state: restarted
+
+- name: system setup | dropbear | update initramfs
+  shell: update-initramfs -u
+
+- name: users | root | zsh-histdb | initialise database
+  become: true
+  become_user: "root"
+  shell: ". /root/.config/zsh/.zshrc && histdb"
+  args:
+    executable: /usr/bin/zsh
+
+- name: users | mog | zsh-histdb | initialise database
+  become: true
+  become_user: "mog"
+  shell: ". /home/mog/.config/zsh/.zshrc && histdb"
+  args:
+    executable: /usr/bin/zsh

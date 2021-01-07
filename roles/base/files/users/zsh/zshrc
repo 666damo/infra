@@ -1,0 +1,41 @@
+source ~/.config/zsh/aliases.zsh
+source ~/.config/zsh/bindkey.zsh
+source ~/.config/zsh/completion.zsh
+source ~/.config/zsh/exports.zsh
+source ~/.config/zsh/functions.zsh
+source ~/.config/zsh/history.zsh
+source ~/.config/zsh/path.zsh
+source ~/.config/zsh/plugins.zsh
+source ~/.config/zsh/prompt.zsh
+source ~/.config/zsh/setopt.zsh
+source ~/.config/zsh/theming.zsh
+source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# https://github.com/larkery/zsh-histdb#installation
+HISTDB_FILE="${HOME}/.cache/zsh-history.db"
+source ~/.config/zsh/zsh-histdb/sqlite-history.zsh
+autoload -Uz add-zsh-hook
+# zsh-histdb up / down arrow binds
+#bindkey '^[[A' history-beginning-search-backward
+#bindkey "^N" history-beginning-search-forward
+#[[ -n "$key[Up]"   ]] && bindkey -- "$key[Up]"   history-beginning-search-backward
+#[[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" history-beginning-search-forward
+
+# https://github.com/larkery/zsh-histdb#integration-with-zsh-autosuggestions
+_zsh_autosuggest_strategy_histdb_top_here() {
+    local query="select commands.argv from
+history left join commands on history.command_id = commands.rowid
+left join places on history.place_id = places.rowid
+where places.dir LIKE '$(sql_escape $PWD)%'
+and commands.argv LIKE '$(sql_escape $1)%'
+group by commands.argv order by count(*) desc limit 1"
+    suggestion=$(_histdb_query "$query")
+}
+ZSH_AUTOSUGGEST_STRATEGY=histdb_top_here
+
+# https://github.com/larkery/zsh-histdb#reverse-isearch
+source ~/.config/zsh/zsh-histdb/histdb-interactive.zsh
+bindkey '^r' _histdb-isearch
+
+# https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#in-your-zshrc
+source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

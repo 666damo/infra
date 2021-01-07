@@ -1,0 +1,68 @@
+---
+
+- name: users | {{ user_name }} | copy dotfiles
+  tags: dotfiles,users,{{ user_name }},tmux,users,vim,zsh
+  copy:
+    src: "users/zsh/{{ item.src }}"
+    dest: "{{ user_home }}/.config/zsh/{{ item.dest }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_group }}"
+    mode: 0600
+  with_items:
+    - { src: 'zshrc', dest: '.zshrc' }
+
+- name: users | {{ user_name }} | copy zsh config files
+  tags: dotfiles,{{ user_name }},users,zsh
+  copy:
+    src: users/zsh/{{ item.src }}
+    dest: "{{ user_home }}/.config/zsh/{{ item.dest }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_group }}"
+    mode: 0600
+  with_items:
+    - { src: 'zshrc', dest: '.zshrc' }
+    - { src: 'aliases.zsh', dest: 'aliases.zsh' }
+    - { src: 'bindkey.zsh', dest: 'bindkey.zsh' }
+    - { src: 'completion.zsh', dest: 'completion.zsh' }
+    - { src: 'exports.zsh', dest: 'exports.zsh' }
+    - { src: 'functions.zsh', dest: 'functions.zsh' }
+    - { src: 'history.zsh', dest: 'history.zsh' }
+    - { src: 'path.zsh', dest: 'path.zsh' }
+    - { src: 'plugins.zsh', dest: 'plugins.zsh' }
+    - { src: 'prompt.zsh', dest: 'prompt.zsh' }
+    - { src: 'setopt.zsh', dest: 'setopt.zsh' }
+    - { src: 'theming.zsh', dest: 'theming.zsh' }
+
+# https://github.com/zsh-users/zsh-autosuggestions
+- name: users | {{ user_name }} | zsh-autosuggestions
+  git:
+    repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
+    dest: '{{ user_home }}/.config/zsh/zsh-autosuggestions'
+
+# https://github.com/larkery/zsh-histdb
+- name: users | {{ user_name }} | zsh-histdb.orig
+  git:
+    repo: 'https://github.com/larkery/zsh-histdb.git'
+    dest: '{{ user_home }}/.config/zsh/zsh-histdb.orig'
+    force: true
+  register: histdb_orig
+
+- name: users | {{ user_name }} | zsh-histdb
+  git:
+    repo: "https://github.com/larkery/zsh-histdb.git"
+    dest: "{{ user_home }}/.config/zsh/zsh-histdb"
+    force: true
+  when: histdb_orig.changed == true
+  notify: users | {{ user_name }} | zsh-histdb | initialise database
+
+- name: users | {{ user_name }} | zsh-histdb | fix date format
+  lineinfile:
+    path: "{{ user_home }}/.config/zsh/zsh-histdb/sqlite-history.zsh"
+    regexp: '^    local timecol="strftime\(case when \$mst > \$dst then .*%H:%M.* else.*'
+    line: "    local timecol=\"strftime(case when $mst > $dst then 'today at %H:%M:%S' else '%Y-%m-%d %H:%M' end, max_start, 'unixepoch', 'localtime') as time\""
+
+# https://github.com/zsh-users/zsh-syntax-highlighting
+- name: users | {{ user_name }} | zsh-syntax-highlighting
+  git:
+    repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
+    dest: '{{ user_home }}/.config/zsh/zsh-syntax-highlighting'

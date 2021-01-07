@@ -1,0 +1,23 @@
+- name: users | ansible | create group
+  tags: groups,ansible,users
+  group:
+    name: ansible
+    state: present
+
+- name: users | ansible | create user
+  tags: ansible,sudo,users
+  user:
+    name: ansible
+    group: ansible
+    groups: adm,ansible,{{ sudo_group }}
+    state: present
+    comment: "Ansible"
+
+- name: users | ansible | ansible | add sudoers file
+  tags: ansible,settings,simone,sudo,system,users
+  copy:
+    src: users/sudoers/sudoers_ansible
+    dest: /etc/sudoers.d/ansible
+    owner: root
+    group: root
+    mode: 0440

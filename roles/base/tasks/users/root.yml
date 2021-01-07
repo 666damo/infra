@@ -1,0 +1,36 @@
+- name: users | root | ensure account is locked
+  user:
+    name: root
+    password_lock: yes
+    shell: /bin/zsh
+
+- name: users | root | add public key
+  tags: dotfiles,root,ssh,ssh-keys,users
+  authorized_key:
+    user: root
+    key: "{{ item }}"
+  with_file:
+    - users/ssh/pubkeys/aura_id_ed25519.pub
+    - users/ssh/pubkeys/azula_id_ed25519.pub
+    - users/ssh/pubkeys/katara_id_ed25519.pub
+
+- name: users | root | config dirs
+  tags: dotfiles,users,root,users,config
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "root"
+    group: "root"
+    mode: '0700'
+  with_items:
+    - "/root/.config"
+    - "/root/.config/git"
+    - "/root/.config/zsh"
+
+- name: users | root | configure zsh
+  include_tasks: users/zsh.yml
+  vars:
+    - user_name: root
+    - user_group: root
+    - user_home: "/root"
+    
