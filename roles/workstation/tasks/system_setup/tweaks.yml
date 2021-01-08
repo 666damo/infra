@@ -23,15 +23,15 @@
     state: absent
   when: ansible_distribution != "Archlinux"
 
-# Ensure core snap is installed
-- name: system setup | tweaks | install/update core snap
-  tags: packages,snap,todoist,workstation-packages
-  #snap:
-  snap:
-    name:  core
-    #state: present
-    state: absent
-  when: ansible_distribution != "Archlinux"
+# # Ensure core snap is installed
+# - name: system setup | tweaks | install/update core snap
+#   tags: packages,snap,todoist,workstation-packages
+#   #snap:
+#   snap:
+#     name:  core
+#     #state: present
+#     state: absent
+#   when: ansible_distribution != "Archlinux"
 
 
 # distro-specific tasks for arch
