@@ -17,6 +17,7 @@ web_browser: flatpak run org.mozilla.firefox
 
 # application selection
 autofs: true
+bitwarden: true
 firefox: true
 foliate: true
 games: true
