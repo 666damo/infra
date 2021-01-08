@@ -27,7 +27,7 @@
 - name: system setup | tweaks | install/update core snap
   tags: packages,snap,todoist,workstation-packages
   #snap:
-  community.general.snap:
+  snap:
     name:  core
     #state: present
     state: absent
