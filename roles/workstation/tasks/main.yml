@@ -34,7 +34,7 @@
   - import_tasks: software/signal.yml
   - import_tasks: software/solaar.yml
   - import_tasks: software/spotify.yml
-  - import_tasks: software/steam.yml
+  # - import_tasks: software/steam.yml
   - import_tasks: software/syncthing.yml
   - import_tasks: software/terraform.yml
   - import_tasks: software/thunderbird.yml
