@@ -15,7 +15,7 @@
 # Note: Not using systemd module because it triggers a dbus error due to no session while user is not logged in
 - name: restart_syncthing
   tags: packages,syncthing
-  command: systemctl restart syncthing@mog
+  shell: ". /root/.config/zsh/.zshrc && systemctl restart syncthing@mog"
   args:
     executable: /usr/bin/zsh
 
