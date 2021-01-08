@@ -7,16 +7,17 @@
     group: 'root'
     mode: '0755'
 
-- name: identify latest release
-  tags: debug_me
-  uri:
-    url: https://api.github.com/repos/be5invis/Iosevka/releases/latest
-    return_content: true
-  register: json_reponse_iosevka
+# - name: identify latest release
+#   tags: debug_me
+#   uri:
+#     url: https://api.github.com/repos/be5invis/Iosevka/releases/latest
+#     return_content: true
+#   register: json_reponse_iosevka
 
 - name: appearance | fonts | Iosevka | download font
   unarchive:
-    src: "{{ json_reponse_iosevka.json.tarball_url }}"
+    # src: "{{ json_reponse_iosevka.json.tarball_url }}"
+    src: "{{ font_iosevka_url }}"
     dest: /usr/share/fonts/truetype/iosevka/
     mode: '0644'
     owner: 'root'
