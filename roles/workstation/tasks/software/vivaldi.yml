@@ -1,3 +1,9 @@
+# - name: Run apt upgrade
+#   apt:
+#     upgrade: "yes"
+#     update_cache: yes
+#     cache_valid_time: 432000
+
 - name: software | vivaldi | add repository key
   tags: packages,vivaldi
   apt_key:
@@ -8,28 +14,30 @@
     - vivaldi is defined
     - vivaldi == true
 
-- name: software | vivaldi | check if repository exists
-  stat:
-    path: /etc/apt/sources.list.d/vivaldi.list
-  register: vivaldi_repo_file
+# - name: software | vivaldi | check if repository exists
+#   stat:
+#     path: /etc/apt/sources.list.d/vivaldi.list
+#   register: vivaldi_repo_file
 
 - name: software | vivaldi | add repository
   tags: packages,vivaldi
   apt_repository:
     repo: "deb https://repo.vivaldi.com/stable/deb/ stable main"
     state: present
-    filename: vivaldi
+    filename: vivaldi.list
+    update_cache: true
   when:
     - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
     - vivaldi is defined
     - vivaldi == true
-    - vivaldi_repo_file.stat.exists == False
+    # - vivaldi_repo_file.stat.exists == False
 
 - name: software | vivaldi | install package
   tags: packages,vivaldi
   apt:
     name: vivaldi-stable
     state: latest
+    update_cache: yes
   when:
     - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
     - vivaldi is defined
