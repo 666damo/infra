@@ -29,12 +29,12 @@ libreoffice: true
 # packer: true
 signal: true
 spotify: true
-steam: true
+# steam: true
 syncthing: true
 terraform: true
 thunderbird: true
 todoist: true
-ulauncher: false
+ulauncher: true
 vagrant: true
 virtualbox: true
 vivaldi: true
