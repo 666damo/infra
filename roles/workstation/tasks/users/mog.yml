@@ -68,7 +68,7 @@
   tags: dotfiles,dotfiles-mog
   get_url:
     url: "{{ user_mog_profilepic_url }}"
-    dest: /var/lib/AccountsService/icons/mog.png
+    dest: /var/lib/AccountsService/icons/mog
     owner: root
     group: root
     mode: 0644
