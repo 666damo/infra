@@ -20,15 +20,15 @@
     - todoist is defined
     - todoist == true
 
-- name: software | todoist | enable autostart
-  tags: packages,todoist,snap,workstation-packages
-  file:
-    src: /var/lib/snapd/desktop/applications/todoist_todoist.desktop
-    dest: /home/mog/.config/autostart/todoist_todoist.desktop
-    owner: mog
-    group: mog
-    state: link
-  when:
-    - ansible_distribution != "Archlinux"
-    - todoist is defined
-    - todoist == true
+# - name: software | todoist | enable autostart
+#   tags: packages,todoist,snap,workstation-packages
+#   file:
+#     src: /var/lib/snapd/desktop/applications/todoist_todoist.desktop
+#     dest: /home/mog/.config/autostart/todoist_todoist.desktop
+#     owner: mog
+#     group: mog
+#     state: link
+#   when:
+#     - ansible_distribution != "Archlinux"
+#     - todoist is defined
+#     - todoist == true
