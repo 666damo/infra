@@ -16,10 +16,10 @@
   - import_tasks: system_setup/tweaks.yml
 
   # install software
- - import_tasks: software/bitwarden.yml
- - import_tasks: software/caffeine.yml
- - import_tasks: software/codecs.yml
- - import_tasks: software/firefox.yml
+  - import_tasks: software/bitwarden.yml
+  - import_tasks: software/caffeine.yml
+  - import_tasks: software/codecs.yml
+  - import_tasks: software/firefox.yml
   - import_tasks: software/foliate.yml
   - import_tasks: software/glimpse.yml
   - import_tasks: software/google_chrome.yml
