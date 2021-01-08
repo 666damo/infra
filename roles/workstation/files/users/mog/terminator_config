@@ -28,7 +28,7 @@
     background_type = transparent
     cursor_color = "#aaaaaa"
     #font = Monospace 14
-    font = Iosevka 14
+    font = Iosevka Fixed 14
     foreground_color = "#ffffff"
     show_titlebar = False
     scrollbar_position = hidden
