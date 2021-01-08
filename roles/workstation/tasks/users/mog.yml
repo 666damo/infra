@@ -67,7 +67,7 @@
 - name: users | mog | copy profile image
   tags: dotfiles,dotfiles-mog
   get_url:
-    src: "{{ user_mog_profilepic_url }}"
+    url: "{{ user_mog_profilepic_url }}"
     dest: /var/lib/AccountsService/icons/mog.png
     owner: root
     group: root
