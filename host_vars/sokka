@@ -1,0 +1,14 @@
+---
+branch: main
+
+# ansible_cron_minute: "40"
+# ssh_port: 22
+# ssh_users: "user1 user2"
+
+# platform-specific
+microcode_amd_install: false
+microcode_intel_install: true
+
+# server
+unattended_upgrades: true
+# web_server: true

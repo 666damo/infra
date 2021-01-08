@@ -1,11 +1,22 @@
-# note: snap packages not automated in arch yet, snapd is not available in repo
+# # note: snap packages not automated in arch yet, snapd is not available in repo
+# - name: software | todoist | install package
+#   tags: packages,snap,todoist,workstation-packages
+#   snap:
+#     name:  todoist
+#     state: present
+#   when:
+#     - ansible_distribution != "Archlinux"
+#     - todoist is defined
+#     - todoist == true
+
 - name: software | todoist | install package
   tags: packages,snap,todoist,workstation-packages
-  snap:
-    name:  todoist
+  become_user: mog
+  flatpak:
+    name: com.todoist.Todoist
+    method: user
     state: present
   when:
-    - ansible_distribution != "Archlinux"
     - todoist is defined
     - todoist == true
 
@@ -13,9 +24,9 @@
   tags: packages,todoist,snap,workstation-packages
   file:
     src: /var/lib/snapd/desktop/applications/todoist_todoist.desktop
-    dest: /home/jay/.config/autostart/todoist_todoist.desktop
-    owner: jay
-    group: jay
+    dest: /home/mog/.config/autostart/todoist_todoist.desktop
+    owner: mog
+    group: mog
     state: link
   when:
     - ansible_distribution != "Archlinux"

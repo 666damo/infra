@@ -18,8 +18,8 @@
 
 - name: unattended upgrades | copy 50unattended-upgrades file (debian)
   tags: debian,packages,unattended,updates,upgrades
-  copy:
-    src: unattended-upgrades/50unattended-upgrades_debian
+  template:
+    src: 50unattended-upgrades_debian.j2
     dest: /etc/apt/apt.conf.d/50unattended-upgrades
     owner: root
     group: root
@@ -28,8 +28,8 @@
 
 - name: unattended upgrades | copy 50unattended-upgrades file (ubuntu)
   tags: packages,unattended,updates,ubuntu,upgrades
-  copy:
-    src: unattended-upgrades/50unattended-upgrades_ubuntu
+  template:
+    src: 50unattended-upgrades_ubuntu.j2
     dest: /etc/apt/apt.conf.d/50unattended-upgrades
     owner: root
     group: root
