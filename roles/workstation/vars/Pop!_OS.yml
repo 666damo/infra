@@ -5,7 +5,7 @@ cups_package: cups-daemon
 font_fira_mono_package: fonts-firacode
 font_hack_ttf_package: fonts-hack-ttf
 font_inconsolata_package: fonts-inconsolata
-font_iosevka_url: "https://github.com/be5invis/Iosevka/releases/download/v4.3.0/webfont-iosevka-4.3.0.zip"
+font_iosevka_url: "https://github.com/be5invis/Iosevka/releases/download/v4.3.0/ttf-iosevka-fixed-4.3.0.zip"
 font_noto_emoji_package: fonts-noto-color-emoji
 font_terminus_package: xfonts-terminus
 gdm_package: gdm3
