@@ -4,10 +4,12 @@
     state: latest
     name:
       - at
+      - borgbackup
       - byobu
       - colordiff
       - curl
       - "{{ dns_utils_package}}"
+      - glances
       - htop
       - iotop
       - "{{ lm_sensors_package }}"
@@ -31,6 +33,7 @@
       - "{{ vim_package }}"
       - wget
       - whois
+      - wireguard
       - zsh
 
 - name: system setup | utilities | install man-pages (arch)

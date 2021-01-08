@@ -16,11 +16,15 @@
 - name: restart_syncthing
   tags: packages,syncthing
   command: systemctl restart syncthing@jay
+  args:
+    executable: /usr/bin/zsh
 
 - name: update_xdg
   tags: users,config,xdg
-  become_user: jay
+  become_user: mog
   command: /usr/bin/xdg-user-dirs-update
+  args:
+    executable: /usr/bin/zsh
 
 # GNOME stuff
 - name: gnome_tracker_clean_cache

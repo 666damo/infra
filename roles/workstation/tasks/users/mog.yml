@@ -1,6 +1,6 @@
-- name: users | jay | remove preinstalled clutter from home directory
+- name: users | mog | remove preinstalled clutter from home directory
   file:
-    path: /home/jay/{{ item }}
+    path: /home/mog/{{ item }}
     state: absent
   with_items:
     - examples.desktop
@@ -13,13 +13,13 @@
     - Templates
     - Videos
 
-- name: users | jay | create personal config directories
-  tags: dotfiles,dotfiles-jay
+- name: users | mog | create personal config directories
+  tags: dotfiles,dotfiles-mog
   file:
-    path: /home/jay/{{ item.dir }}
+    path: /home/mog/{{ item.dir }}
     state: directory
-    owner: jay
-    group: jay
+    owner: mog
+    group: mog
     mode: 0700
   with_items:
     - { dir: .config }
@@ -34,42 +34,41 @@
     - { dir: desktop }
     - { dir: documents }
     - { dir: downloads }
+    - { dir: music }
+    - { dir: pictures }
     - { dir: projects }
     - { dir: templates }
+    - { dir: videos }
 
-- name: users | jay | copy user-dirs.dirs
-  tags: dotfiles,dotfiles-jay
+- name: users | mog | copy user-dirs.dirs
+  tags: dotfiles,dotfiles-mog
   copy:
-    src: users/jay/user-dirs.dirs
-    dest: /home/jay/.config/user-dirs.dirs
-    owner: jay
-    group: jay
+    src: users/mog/user-dirs.dirs
+    dest: /home/mog/.config/user-dirs.dirs
+    owner: mog
+    group: mog
     mode: 0600
   notify: update_xdg
 
-- name: users | jay | copy personal config files
-  tags: dotfiles,dotfiles-jay
+- name: users | mog | copy personal config files
+  tags: dotfiles,dotfiles-mog
   copy:
-    src: users/jay/{{ item.src }}
-    dest: /home/jay/{{ item.dest }}
-    owner: jay
-    group: jay
+    src: users/mog/{{ item.src }}
+    dest: /home/mog/{{ item.dest }}
+    owner: mog
+    group: mog
     mode: 0600
   with_items:
-    - { src: 'asunder', dest: '.asunder' }
-    - { src: 'bpytop.conf', dest: '.config/bpytop/bpytop.conf' }
     - { src: 'directory_bookmarks', dest: '.config/gtk-3.0/bookmarks' }
-    - { src: 'gvimrc', dest: '.gvimrc' }
-    - { src: 'linode-cli', dest: '.config/linode-cli' }
     - { src: 'mimeapps.list', dest: '.config/mimeapps.list' }
     - { src: 'ssh_client_config', dest: '.ssh/config' }
     - { src: 'terminator_config', dest: '.config/terminator/config' }
 
-- name: users | jay | copy profile image
-  tags: dotfiles,dotfiles-jay
-  copy:
-    src: users/jay/profile_image.png
-    dest: /var/lib/AccountsService/icons/jay.png
+- name: users | mog | copy profile image
+  tags: dotfiles,dotfiles-mog
+  get_url:
+    src: "{{ user_mog_profilepic_url }}"
+    dest: /var/lib/AccountsService/icons/mog.png
     owner: root
     group: root
     mode: 0644

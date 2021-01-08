@@ -1,4 +1,5 @@
 - name: appearance | fonts | Iosevka | create dir
+  tags: debug_me
   file:
     path: /usr/share/fonts/truetype/iosevka/
     state: directory
@@ -6,9 +7,16 @@
     group: 'root'
     mode: '0755'
 
+- name: identify latest release
+  tags: debug_me
+  uri:
+    url: https://api.github.com/repos/be5invis/Iosevka/releases/latest
+    return_content: true
+  register: json_reponse_iosevka
+
 - name: appearance | fonts | Iosevka | download font
   unarchive:
-    src: https://github.com/be5invis/Iosevka/releases/download/v4.1.1/ttc-iosevka-4.1.1.zip
+    src: "{{ json_reponse_iosevka.json.tarball_url }}"
     dest: /usr/share/fonts/truetype/iosevka/
     mode: '0644'
     owner: 'root'
