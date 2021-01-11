@@ -76,8 +76,8 @@
 - name: users | mog | wallpaper get
   tags: dotfiles,dotfiles-mog
   gsettings:
-    path: "org.gnome.desktop.background picture-uri"
-    key: host
+    path: org.gnome.desktop.background
+    key: picture-uri
     state: get
   register: background
 
