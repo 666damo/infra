@@ -22,7 +22,7 @@
 - name: update_xdg
   tags: users,config,xdg
   become_user: mog
-  command: /usr/bin/xdg-user-dirs-update
+  shell: ". /home/mog/.config/zsh/.zshrc && /usr/bin/xdg-user-dirs-update"
   args:
     executable: /usr/bin/zsh
 

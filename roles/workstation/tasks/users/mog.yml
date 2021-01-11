@@ -72,3 +72,15 @@
     owner: root
     group: root
     mode: 0644
+
+- name: users | mog | wallpaper get
+  tags: dotfiles,dotfiles-mog
+  gsettings:
+    path: "org.gnome.desktop.background picture-uri"
+    key: host
+    state: get
+  register: background
+
+- name: background
+  debug:
+    var: background
