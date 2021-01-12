@@ -7,12 +7,12 @@
     state: present
   when: thunderbird is defined and thunderbird == true
 
-- name: software | thunderbird | enable autostart
-  tags: packages,flatpak,thunderbird,workstation-packages
-  file:
-    src: /home/mog/.local/share/flatpak/exports/share/applications/org.mozilla.Thunderbird.desktop
-    dest: /home/mog/.config/autostart/org.mozilla.Thunderbird.desktop
-    owner: mog
-    group: mog
-    state: link
-  when: thunderbird is defined and thunderbird == true
+# - name: software | thunderbird | enable autostart
+#   tags: packages,flatpak,thunderbird,workstation-packages
+#   file:
+#     src: /home/mog/.local/share/flatpak/exports/share/applications/org.mozilla.Thunderbird.desktop
+#     dest: /home/mog/.config/autostart/org.mozilla.Thunderbird.desktop
+#     owner: mog
+#     group: mog
+#     state: link
+#   when: thunderbird is defined and thunderbird == true
