@@ -73,14 +73,21 @@
     group: root
     mode: 0644
 
-- name: users | mog | wallpaper get
+- name: users | mog | copy background image
+  tags: dotfiles,dotfiles-mog
+  get_url:
+    url: "{{ user_mog_background_url }}"
+    dest: "/usr/share/backgrounds/robot.jpg"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: users | mog | wallpaper set
   tags: dotfiles,dotfiles-mog
   gsettings:
     path: org.gnome.desktop.background
     key: picture-uri
-    state: get
-  register: background
+    state: set
+    value: "file:///usr/share/backgrounds/robot.jpg"
 
-- name: background
-  debug:
-    var: background
+#'file:///usr/share/backgrounds/pop/kate-hazen-pop-retro2.png'
