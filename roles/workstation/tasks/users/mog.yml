@@ -82,12 +82,20 @@
     group: root
     mode: 0644
 
-- name: users | mog | wallpaper set
+- name: users | mog | background get
   tags: dotfiles,dotfiles-mog
-  gsettings:
-    path: org.gnome.desktop.background
-    key: picture-uri
-    state: present
-    value: "file:///usr/share/backgrounds/robot.jpg"
+  become_user: mog
+  shell: ". /home/mog/.config/zsh/.zshrc && gsettings get org.gnome.desktop.background picture-uri"
+  args:
+    executable: /usr/bin/zsh
+  register: current-background
+
+- name: users | mog | background set
+  tags: dotfiles,dotfiles-mog
+  become_user: mog
+  shell: ". /home/mog/.config/zsh/.zshrc && gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/robot.jpg'"
+  args:
+    executable: /usr/bin/zsh
+  when: "'file:///usr/share/backgrounds/robot.jpg' not in current-background.stdout"
 
 #'file:///usr/share/backgrounds/pop/kate-hazen-pop-retro2.png'
