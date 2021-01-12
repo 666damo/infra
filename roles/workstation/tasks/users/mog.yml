@@ -87,7 +87,7 @@
   gsettings:
     path: org.gnome.desktop.background
     key: picture-uri
-    state: set
+    state: present
     value: "file:///usr/share/backgrounds/robot.jpg"
 
 #'file:///usr/share/backgrounds/pop/kate-hazen-pop-retro2.png'
