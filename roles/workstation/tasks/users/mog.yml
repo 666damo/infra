@@ -89,6 +89,7 @@
   args:
     executable: /usr/bin/zsh
   register: currentbackground
+  changed_when: false
 
 - name: users | mog | background set
   tags: dotfiles,dotfiles-mog
